@@ -1,0 +1,170 @@
+.signup-container,
+.login-container {
+    background-color: rgb(23, 23, 26);
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 90%; /* Added for responsiveness */
+    max-height: 90vh; /* Changed for mobile */
+    padding: 20px 30px; /* Reduced side padding for mobile */
+    border-radius: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box; /* Added to include padding in width */
+    overflow-y: auto; /* Added for content that exceeds height */
+}
+
+.text-container {
+    color: white;
+    font-size: clamp(28px, 5vw, 35px); /* Responsive font size */
+    font-weight: 400;
+    margin-bottom: 25px;
+    text-align: center; /* Better for mobile */
+}
+
+.password-input,
+.email-input {
+    background-color: transparent;
+    border: 1px solid rgb(51, 51, 51);
+    padding: 12px; /* Slightly larger for touch */
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 16px; /* Better for mobile */
+    color: white;
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Add focus states for better accessibility */
+.password-input:focus,
+.email-input:focus {
+    outline: none;
+    border-color: rgb(0, 115, 255);
+}
+
+.password-input {
+    width: 100%;
+    padding-right: 50px; /* Space for eye icon */
+}
+
+.visible-password {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-110%); /* Better vertical centering */
+    cursor: pointer;
+    z-index: 2;
+}
+
+.password-container {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.password-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: rgb(167, 167, 167);
+    font-size: 14px; /* Consistent font size */
+}
+
+.email-text,
+.password-text {
+    margin-bottom: 8px;
+    font-size: 14px; /* Consistent font size */
+}
+
+.email-text {
+    color: rgb(167, 167, 167);
+}
+
+.login-button {
+    width: 100%;
+    background-color: rgb(0, 115, 255);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-size: 16px; /* Better for mobile */
+    transition: background-color 0.2s; /* Added hover effect */
+}
+
+/* Add hover state for better UX */
+.login-button:hover {
+    background-color: rgb(0, 95, 220);
+}
+
+.account-text {
+    text-align: center;
+    color: rgb(116, 108, 108);
+    letter-spacing: 0.2px;
+    font-size: 14px;
+}
+
+.redirect {
+    text-decoration: none;
+    color: rgb(167, 167, 167);
+    letter-spacing: 0.2px;
+    padding-left: 8px; /* Slightly reduced for mobile */
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+/* Add hover state for links */
+.redirect:hover {
+    color: white;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+        max-height: 95vh; /* More height on mobile */
+        width: 85%; /* Slightly wider on mobile */
+    }
+    
+    .text-container {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .password-input,
+    .email-input {
+        padding: 14px; /* Larger touch targets */
+        margin-bottom: 20px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .login-button {
+        padding: 16px; /* Larger button for mobile */
+    }
+    
+    .visible-password {
+        right: 12px;
+        width: 22px;
+        height: 22px; /* Larger touch target */
+    }
+}
+
+/* Very small phones */
+@media (max-width: 320px) {
+    .login-container {
+        padding: 15px;
+        width: 90%;
+    }
+    
+    .text-container {
+        font-size: 22px;
+    }
+}
