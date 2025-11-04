@@ -21,6 +21,7 @@ app.use(cookieParser());
 
 app.use("/api/users", require(path.join(__dirname, "src", "routes", "userRoutes")));
 app.use("/api/auth", require(path.join(__dirname, "src", "routes", "authRoutes.js")));
+app.use('/api/posts', require(path.join(__dirname, 'src', 'routes', 'postRoutes')));
 
 app.listen(PORT, () => {
     console.log("Server running on Port:", PORT);

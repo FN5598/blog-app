@@ -23,6 +23,9 @@ export function ProtectedRoute({ children }) {
 
     function handleClose() {
         setVisible(false);
+    }
+
+    if(!isAuthenticated) {
         navigate('/');
     }
 

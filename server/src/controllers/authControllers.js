@@ -1,4 +1,4 @@
-const User = require('../model/userModel');
+const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 
@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
         };
 
         const payload = {
-            userId: user._id,
+            id: user._id,
             email: user.email
         };
 
@@ -215,7 +215,7 @@ const refreshToken = async (req, res) => {
         const refreshToken = req.cookies.refreshToken;
 
         if (!refreshToken) {
-            console.log("No refresh token provided");
+            console.log("No refresh token provided 1");
             return res.status(401).json({
                 success: false,
                 message: "Refresh token is required"
@@ -226,6 +226,7 @@ const refreshToken = async (req, res) => {
         try {
             decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
         } catch (err) {
+            console.log("Invalid refresh token:", err);
             return res.status(403).json({
                 success: false,
                 message: "Invalid or expired refresh token"
@@ -233,6 +234,7 @@ const refreshToken = async (req, res) => {
         }
         const user = await User.findById(decoded.id);
         if (!user) {
+            console.log("User not found for refresh token");
             return res.status(404).json({
                 success: false,
                 message: "User not found"
@@ -248,6 +250,7 @@ const refreshToken = async (req, res) => {
 
         const isTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);
         if (!isTokenValid) {
+            console.log("Refresh token does not match stored hash");
             return res.status(403).json({
                 success: false,
                 message: "Invalid refresh token"
@@ -260,10 +263,6 @@ const refreshToken = async (req, res) => {
         };
 
         const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE });
-        const newRefreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRE });
-
-        user.refreshToken = await bcrypt.hash(newRefreshToken, 10);
-        await user.save();
 
         res.cookie('accessToken', newAccessToken, {
             httpOnly: true,
@@ -271,12 +270,6 @@ const refreshToken = async (req, res) => {
             secure: true,
             path: "/",
             maxAge: 15 * 60 * 1000
-        });
-
-        res.cookie('refreshToken', newRefreshToken, {
-            httpOnly: true,
-            sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         res.status(200).json({
@@ -303,7 +296,7 @@ const refreshToken = async (req, res) => {
 const checkAuth = async (req, res) => {
     const token = req.cookies?.accessToken;
     if (!token) {
-        console.log("No access token provided");
+        console.log("No access token provided 2");
         return res.status(401).json({
             authenticated: false,
             message: "Try refreshing access token"
