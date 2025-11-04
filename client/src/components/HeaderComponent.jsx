@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-
 import "./HeaderComponent.css";
 import logo from "/Logo.png"
 

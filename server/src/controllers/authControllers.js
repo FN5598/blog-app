@@ -208,13 +208,14 @@ const logoutUser = async (req, res) => {
 }
 
 //@desc Refresh User Access Token 
-//@route /api/auth/refresh
+//@route POST /api/auth/refresh
 //@access public
 const refreshToken = async (req, res) => {
     try {
         const refreshToken = req.cookies.refreshToken;
 
         if (!refreshToken) {
+            console.log("No refresh token provided");
             return res.status(401).json({
                 success: false,
                 message: "Refresh token is required"
@@ -258,15 +259,17 @@ const refreshToken = async (req, res) => {
             email: user.email
         };
 
-        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRE });
-        const newRefreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRE });
+        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE });
+        const newRefreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRE });
 
         user.refreshToken = await bcrypt.hash(newRefreshToken, 10);
         await user.save();
 
         res.cookie('accessToken', newAccessToken, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'None',
+            secure: true,
+            path: "/",
             maxAge: 15 * 60 * 1000
         });
 
@@ -286,10 +289,45 @@ const refreshToken = async (req, res) => {
         });
     } catch (err) {
         console.log("Refresh token error", err);
-        res.status(500).jsom({
+        res.status(500).json({
             success: false,
             message: "Failed to refresh user token",
             error: err.message
+        });
+    }
+}
+
+//@desc Check if user is authorized
+//@route GET /api/auth/check-auth
+//@access private
+const checkAuth = async (req, res) => {
+    const token = req.cookies?.accessToken;
+    if (!token) {
+        console.log("No access token provided");
+        return res.status(401).json({
+            authenticated: false,
+            message: "Try refreshing access token"
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        res.json({
+            authenticated: true,
+            user: decoded,
+            success: true
+        });
+    } catch (err) {
+        if (err.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                authenticated: false,
+                message: "Access token expired"
+            });
+        }
+
+        return res.status(403).json({
+            authenticated: false,
+            message: "Invalid token"
         });
     }
 }
@@ -298,5 +336,6 @@ module.exports = {
     loginUser,
     createNewUser,
     logoutUser,
-    refreshToken
+    refreshToken,
+    checkAuth
 }
