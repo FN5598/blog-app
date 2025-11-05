@@ -38,8 +38,7 @@ export function BlogsComponent() {
                 {
                     withCredentials: true,
                 });
-            console.log(res.data);
-            navigate(`/blog/${blogId}`, { state: { blog: res.data } });
+            navigate(`/blog/${(res.data.genre.toLowerCase())}/${blogId}`, { state: { blog: res.data } });
         } catch (err) {
             if (err.response?.data?.message)
                 alert(err.response.data.message);
@@ -51,7 +50,7 @@ export function BlogsComponent() {
     return (
         <>
             <div className="blogs-tags-container">
-                <button>All</button>
+                <button>General</button>
                 <button>Technology</button>
                 <button>Politics</button>
                 <button>Health</button>
@@ -67,8 +66,8 @@ export function BlogsComponent() {
                         <div className="user-information">
                             <img className="user-logo" src={defaultImg} />
                             <div className="username-genre">
-                                <p>{blog.author}</p>
-                                <p>Technology</p>
+                                <p>{blog.author_name}</p>
+                                <p>{blog.genre}</p>
                             </div>
                         </div>
                         <div className="blog-information">

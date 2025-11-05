@@ -13,10 +13,13 @@ const postSchema = new mongoose.Schema({
         maxlength: [10000, 'Content cannot exceed 10000 characters']
     },
     // User reference (foreign key)
-    author: {
+    author_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'Post author is required']
+    },
+    author_name: {
+        type: String,
     },
     created_at: {
         type: Date,
@@ -25,6 +28,10 @@ const postSchema = new mongoose.Schema({
     updated_at: {
         type: Date,
         default: Date.now
+    },
+    genre: {
+        type: String,
+        trim: true
     },
     
     // Likes system - array of user IDs who liked the post

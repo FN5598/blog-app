@@ -1,4 +1,5 @@
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
 
 //@desc Get all posts
 //@route GET /api/posts
@@ -65,6 +66,9 @@ const getPostById = async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
+
+        const user = await User.findById(post.author_id);
+        post.author_name = user ? user.username : "Unknown";
         res.json(post);
     } catch (error) {
         res.status(500).json({ message: "Server error" });
