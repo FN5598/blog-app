@@ -1,13 +1,17 @@
-import { FooterComponent } from "../components/FooterComponent";
-import { HeaderComponent } from "../components/HeaderComponent";
 import "./BlogPage.css";
+import { useLocation } from "react-router-dom";
 
 export function BlogPage() {
+
+    const location = useLocation();
+    const { state } = location;
+
+    const blog = state?.blog;
+
     return (
         <div>
-            <HeaderComponent />
-
-            <FooterComponent />
+            <h1>{blog?.title}</h1>
+            <p>{blog?.content}</p>
         </div>
-    );
+    )
 }
