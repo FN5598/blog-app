@@ -1,10 +1,12 @@
+.blog-container {
+    width: 100%;
+}
+
 .genre-image {
-    width: 100vw;
+    width: 100%;
     height: 400px;
     object-fit: cover;
     object-position: center;
-    top: 0;
-    left: 0;
     position: relative;
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
@@ -12,11 +14,13 @@
 .blog-page-title {
     display: flex;
     position: absolute;
-    top: 40%;
+    top: 33%;
     left: 50%;
-    transform: translate(-40%, -50%);
+    transform: translate(-50%, -50%); /* Fixed centering */
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    font-size: 24px; /* Smaller on mobile */
 }
 
 .loading-container {
@@ -28,6 +32,7 @@
 
 .blog-page-details {
     display: flex;
+    flex-direction: column; /* Stack on mobile */
     border-top: 1px solid rgb(51, 51, 51);
     border-bottom: 1px solid rgb(51, 51, 51);
     color: white;
@@ -36,35 +41,146 @@
 .blog-page-text {
     color: white;
     line-height: 1.6;
-    font-size: 18px;
-    border-right: 1px solid rgb(51, 51, 51);
+    font-size: 16px; /* Smaller on mobile */
+    border-right: none; /* Remove on mobile */
     padding-top: 20px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .blog-page-content {
-    padding: 40px 80px;
+    padding: 20px 40px; /* Reduced on mobile */
 }
 
 .blog-full-information {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .likes-comments-reposts-container {
     display: flex;
     gap: 10px;
-    padding: 40px 60px 30px 60px;
+    padding: 30px 20px; /* Reduced on mobile */
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid rgb(51, 51, 51);;
 }
 
 .additional-info-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Single column on mobile */
+    justify-items: flex-start;
     max-width: 400px;
     gap: 30px;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 20px 60px;
+    padding: 20px;
     border-top: 1px solid rgb(51, 51, 51);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tablet Styles (768px and up) */
+@media (min-width: 768px) {
+    .blog-page-title {
+        font-size: 32px;
+        top: 33%
+    }
+    
+    .blog-page-details {
+        flex-direction: row; /* Side by side */
+    }
+    
+    .blog-page-text {
+        font-size: 17px;
+        border-right: 1px solid rgb(51, 51, 51); /* Add right border */
+        width: 70%;
+    }
+    
+    .blog-page-content {
+        padding: 30px 40px;
+    }
+    
+    .blog-full-information {
+        width: 30%;
+    }
+    
+    .likes-comments-reposts-container {
+        padding: 40px 30px;
+        border-top: none;
+    }
+    
+    .additional-info-container {
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+        padding: 20px 30px;
+    }
+}
+
+/* Desktop Styles (1024px and up) */
+@media (min-width: 1024px) {
+    .blog-page-title {
+        font-size: 42px;
+    }
+    
+    .blog-page-text {
+        font-size: 18px;
+        width: 75%;
+    }
+    
+    .blog-page-content {
+        padding: 40px 80px; /* Original padding */
+    }
+    
+    .blog-full-information {
+        width: 25%;
+    }
+    
+    .likes-comments-reposts-container {
+        padding: 40px 60px 30px 60px; /* Original padding */
+        border-top: none;
+    }
+    
+    .additional-info-container {
+        padding: 20px 60px; /* Original padding */
+    }
+}
+
+/* Large Desktop Styles (1920px and up) */
+@media (min-width: 1920px) {
+    .blog-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .genre-image {
+        height: 500px;
+    }
+    
+    .blog-page-title {
+        font-size: 52px;
+        top: 40%;
+    }
+    
+    .blog-page-text {
+        width: 80%;
+        padding-top: 40px;
+    }
+    
+    .blog-page-content {
+        padding: 60px 100px;
+        font-size: 20px;
+        line-height: 1.8;
+    }
+    
+    .blog-full-information {
+        width: 20%;
+    }
+
+    .likes-comments-reposts-container {
+        border-top: none;
+    }
+
+    .additional-info-container {
+        border-top: 1px solid rgb(51, 51, 51);
+    }
 }

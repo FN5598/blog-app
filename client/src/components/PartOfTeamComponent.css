@@ -1,0 +1,239 @@
+.part-of-team-container {
+    background-color: rgb(25, 25, 25);
+    padding: 40px 20px;
+    /* Reduced padding for mobile */
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.part-of-team-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    /* Limit max width on large screens */
+}
+
+.part-of-team-introduction {
+    display: flex;
+    flex-direction: column;
+    /* Stack on mobile */
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+}
+
+.part-of-team-p {
+    max-width: 211px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 200;
+    margin-left: 10px;
+}
+
+.logo-no-text-image {
+    max-width: 120px;
+    /* Smaller on mobile */
+    height: 120px;
+}
+
+.part-of-team-h1 {
+    color: white;
+    font-size: 32px;
+    /* Smaller on mobile */
+    line-height: 130%;
+    letter-spacing: -1%;
+    font-weight: 300;
+    text-align: start;
+    /* Center on mobile */
+    padding: 0px 10px;
+    ;
+}
+
+.part-of-team-p-info {
+    font-size: 16px;
+    /* Smaller on mobile */
+    font-weight: 200;
+    line-height: 150%;
+    letter-spacing: -2%;
+    color: #7E7E81;
+    text-align: start;
+    /* Center on mobile */
+    margin-top: 20px;
+    padding: 0 10px;
+    /* Add padding on mobile */
+}
+
+.part-of-team-buttons-container {
+    display: flex;
+    flex-direction: column;
+    /* Stack buttons on mobile */
+    margin-top: 30px;
+    background-color: rgb(20, 20, 20);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgb(51, 51, 51);
+    gap: 20px;
+    /* Space between stacked items */
+    max-width: 100%;
+}
+
+.events-button-container,
+.forum-button-container,
+.resources-button-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    /* Full width on mobile */
+    padding: 30px 20px;
+    /* Reduced padding on mobile */
+    border: 1px solid rgb(51, 51, 51);
+    background-color: rgb(25, 25, 25);
+    border-radius: 12px;
+    gap: 15px;
+    text-align: start;
+    align-self: center;
+}
+
+.events-button-container p,
+.forum-button-container p,
+.resources-button-container p {
+    color: #98989A;
+    font-size: 16px;
+    /* Smaller on mobile */
+    line-height: 150%;
+    letter-spacing: -2%;
+    font-weight: 300;
+}
+
+.events-button-header,
+.forum-button-header,
+.resources-button-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.events-button-header h1,
+.forum-button-header h1,
+.resources-button-header h1 {
+    font-size: 20px;
+    /* Smaller on mobile */
+    line-height: 150%;
+    letter-spacing: -2%;
+    color: white;
+}
+
+/* Tablet Styles (768px and up) */
+@media (min-width: 768px) {
+    .part-of-team-container {
+        padding: 60px 40px;
+    }
+
+    .part-of-team-introduction {
+        flex-direction: row;
+        /* Side by side on tablet */
+        text-align: start;
+        gap: 60px;
+    }
+
+    .part-of-team-h1 {
+        font-size: 48px;
+        text-align: start;
+    }
+
+    .part-of-team-p-info {
+        font-size: 18px;
+        text-align: start;
+        padding: 0 10px;
+    }
+
+    .logo-no-text-image {
+        max-width: 150px;
+        height: 150px;
+    }
+
+    .part-of-team-buttons-container {
+        flex-direction: row;
+        /* Buttons in row on tablet */
+        flex-wrap: wrap;
+        /* Allow wrapping if needed */
+        justify-content: center;
+        padding: 30px;
+        gap: 20px;
+    }
+
+    .events-button-container,
+    .forum-button-container,
+    .resources-button-container {
+        flex: 1;
+        /* Equal width */
+        min-width: 200px;
+        /* Minimum width before wrapping */
+        max-width: calc(33.333% - 14px);
+        /* 3 columns with gap */
+        padding: 30px;
+        height: 200px;
+    }
+}
+
+/* Desktop Styles (1024px and up) */
+@media (min-width: 1024px) {
+    .part-of-team-container {
+        padding: 80px;
+    }
+
+    .part-of-team-h1 {
+        font-size: 58px;
+        letter-spacing: -3%;
+    }
+
+    .part-of-team-p-info {
+        font-size: 18px;
+        letter-spacing: -3%;
+    }
+
+    .events-button-container p,
+    .forum-button-container p,
+    .resources-button-container p {
+        font-size: 18px;
+        letter-spacing: -3%;
+    }
+
+    .events-button-header h1,
+    .forum-button-header h1,
+    .resources-button-header h1 {
+        font-size: 22px;
+        letter-spacing: -3%;
+    }
+
+    .part-of-team-buttons-container {
+        justify-content: space-evenly;
+        gap: 30px;
+    }
+
+    .events-button-container,
+    .forum-button-container,
+    .resources-button-container {
+        padding: 40px;
+        max-width: 400px;
+    }
+}
+
+/* Large Desktop (1440px and up) */
+@media (min-width: 1440px) {
+    .part-of-team-wrapper {
+        max-width: 1400px;
+    }
+}

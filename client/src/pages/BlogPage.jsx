@@ -1,4 +1,5 @@
 import { HeaderComponent } from "../components/HeaderComponent";
+import { FooterComponent } from "../components/FooterComponent";
 import "./BlogPage.css";
 import { ThreeDot } from "react-loading-indicators";
 import axios from 'axios';
@@ -10,6 +11,7 @@ import Health from "/Health-background.jpg";
 import Environment from "/Enviroment-background.jpg";
 import Sports from "/Sports-background.jpg";
 import General from "/General-background.jpg";
+import { PartOfTeamComponent } from "../components/PartOfTeamComponent";
 
 export function BlogPage() {
 
@@ -109,8 +111,10 @@ export function BlogPage() {
 
                 </div>
             </div>
-
-        </div>) : (
+            <PartOfTeamComponent />
+            <FooterComponent />
+        </div>
+        ) : (
             <div>Blog not found</div> // Or your loading/error state
         )
 
