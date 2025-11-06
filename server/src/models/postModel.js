@@ -5,21 +5,23 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Post title is required'],
         trim: true,
-        maxlength: [200, 'Title cannot exceed 200 characters']
+        maxlength: [100, 'Title cannot exceed 100 characters']
     },
     content: {
         type: String,
         required: [true, 'Post content is required'],
         maxlength: [10000, 'Content cannot exceed 10000 characters']
     },
+    introduction: {
+        type: String,
+        trim: true,
+        maxlength: [300, 'Introduction cannot exceed 300 characters']
+    },
     // User reference (foreign key)
-    author_id: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'Post author is required']
-    },
-    author_name: {
-        type: String,
     },
     created_at: {
         type: Date,

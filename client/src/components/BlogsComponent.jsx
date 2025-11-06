@@ -3,6 +3,7 @@ import "./BlogsComponent.css";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { ThreeDot } from "react-loading-indicators";
 
 export function BlogsComponent() {
 
@@ -17,8 +18,8 @@ export function BlogsComponent() {
                     {
                         withCredentials: true,
                     });
-                console.log(response.data);
-                setBlogs(response.data);
+                setBlogs(response.data.data);
+                console.log(response.data.data);
             } catch (err) {
                 if (err.response?.data?.message) {
                     alert(err.response.data.message);
@@ -38,7 +39,7 @@ export function BlogsComponent() {
                 {
                     withCredentials: true,
                 });
-            navigate(`/blog/${(res.data.genre.toLowerCase())}/${blogId}`, { state: { blog: res.data } });
+            navigate(`/blog/${(res.data.data.genre.toLowerCase())}/${blogId}`, { state: { blog: res.data.data } });
         } catch (err) {
             if (err.response?.data?.message)
                 alert(err.response.data.message);
@@ -57,7 +58,7 @@ export function BlogsComponent() {
                 <button>Enviroment</button>
                 <button>Sports</button>
             </div>
-            {blogs.map(blog => {
+            {(blogs.length > 0) ? (blogs.map(blog => {
                 return (
                     <div
                         className="recent-blogs-container"
@@ -66,7 +67,7 @@ export function BlogsComponent() {
                         <div className="user-information">
                             <img className="user-logo" src={defaultImg} />
                             <div className="username-genre">
-                                <p>{blog.author_name}</p>
+                                <p>{blog.author ? blog.author.username : "Unknown"}</p>
                                 <p>{blog.genre}</p>
                             </div>
                         </div>
@@ -86,7 +87,14 @@ export function BlogsComponent() {
                         >View Blog</button>
                     </div>
                 )
-            })}
+            })) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", gap: "30px", marginBottom: "50px" }}>
+                    <div style={{ color: "white", fontSize: "24px", textAlign: "center", marginTop: "20px" }}>
+                        Loading Blogs
+                    </div>
+                    <ThreeDot color={["#32cd32", "#327fcd", "#cd32cd", "#cd8032"]} />
+                </div>
+            )}
         </>
     );
 }

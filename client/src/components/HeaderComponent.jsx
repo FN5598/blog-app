@@ -35,6 +35,10 @@ export function HeaderComponent() {
                     className={location.pathname === '/last-visited' ? 'active-button' : 'button'}
                     onClick={() => handleButtonClick('/last-visited')}
                 >Last visited</button>
+                <button
+                    className={location.pathname === '/create-blog' ? 'active-button' : 'button'}
+                    onClick={() => handleButtonClick('/create-blog')}
+                >Create Blog</button>
             </div>
             <button
                 className='contact-us-button'

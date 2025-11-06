@@ -105,7 +105,7 @@ export function BlogPage() {
                         </div>
                         <div className="blog-author-container">
                             <p>Author</p>
-                            <span>{blog.author_name}</span>
+                            <span>{blog.author ? blog.author.username : "Unknown"}</span>
                         </div>
                     </div>
 

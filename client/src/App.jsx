@@ -8,6 +8,7 @@ import { LastVisitedBlog } from './pages/LastVisitedBlog';
 import { LoginPage } from './pages/auth-pages/LoginPage';
 import { CreateAccountPage } from './pages/auth-pages/CreateAccountPage';
 import { ProtectedRoute } from './components/ProtectedRoutes';
+import { CreateBlogPage } from './pages/CreateBlogPage';
 
 function App() {
   return (
@@ -16,19 +17,26 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
-        
+
         <Route path="/blogs" element={<BlogsPage />} />
         <Route path="/blog/:genre/:id" element={<BlogPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<CreateAccountPage />} />
 
-        <Route path='last-visited' 
-        element={
-          <ProtectedRoute>
-            <LastVisitedBlog />
-          </ProtectedRoute>
-        } />
+        <Route path='last-visited'
+          element={
+            <ProtectedRoute>
+              <LastVisitedBlog />
+            </ProtectedRoute>
+          } />
+
+        <Route path='create-blog'
+          element={
+            <ProtectedRoute>
+              <CreateBlogPage />
+            </ProtectedRoute>
+          } />
 
       </Routes>
     </Router>
