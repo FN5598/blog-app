@@ -11,11 +11,14 @@ const options = {
         },
         servers: [
             { url: "http://localhost:5000", description: "Development server" },
-        ],
+        ]
     },
-    apis: ["./src/routes/*.js"], // Path to your route files with JSDoc annotations
+    apis: ["./src/routes/*.js"]
 };
 
 const specs = swaggerJsdoc(options);
 
-module.exports = { swaggerUi, specs };
+module.exports = {
+    swaggerUi,
+    specs
+};

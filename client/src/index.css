@@ -7,3 +7,14 @@
 body {
   background-color: rgb(20, 20, 20);
 }
+
+.hide-scrollbar-smooth {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.hide-scrollbar-smooth::-webkit-scrollbar {
+  display: none;
+}

@@ -1,5 +1,4 @@
 const Post = require("../models/postModel");
-const User = require("../models/userModel");
 
 //@desc Get all posts
 //@route GET /api/posts
@@ -28,7 +27,6 @@ const getAllPosts = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
-
 
 //@desc Create a new post
 //@route POST /api/posts
@@ -92,9 +90,16 @@ const updatePost = async (req, res) => {
             });
         }
 
-        post.introduction = introduction;
-        post.title = title;
-        post.content = content;
+        if (post.author.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "You can only update your own posts"
+            });
+        }
+
+        if (introduction) post.introduction = introduction;
+        if (title) post.title = title;
+        if (content) post.content = content;
         post.updated_at = Date.now();
         await post.save();
 
@@ -150,7 +155,16 @@ const deletePost = async (req, res) => {
                 message: "Post not found"
             });
         }
-        await post.remove();
+
+        // Check if user owns the post
+        if (post.author.toString() !== req.user.id) {
+            return res.status(403).json({
+                success: false,
+                message: "You can only delete your own posts"
+            });
+        }
+
+        await Post.findByIdAndDelete(req.params.id);
         res.json({
             success: true,
             message: "Post deleted"

@@ -23,7 +23,6 @@ console.log("Swagger specs generated:", !!specs);
 console.log("OpenAPI version:", specs?.openapi)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-app.use("/api/users", require(path.join(__dirname, "src", "routes", "userRoutes")));
 app.use("/api/auth", require(path.join(__dirname, "src", "routes", "authRoutes.js")));
 app.use('/api/posts', require(path.join(__dirname, 'src', 'routes', 'postRoutes')));
 

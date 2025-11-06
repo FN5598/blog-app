@@ -6,7 +6,7 @@ import { PartOfTeamComponent } from "../components/PartOfTeamComponent";
 
 export function HomePage() {
     return (
-        <>
+        <div className="home-page-container hide-scrollbar-smooth">
             <HeaderComponent />
             
             <DiscoverComponent />
@@ -14,6 +14,6 @@ export function HomePage() {
             <PartOfTeamComponent />
 
             <FooterComponent />
-        </>
+        </div>
     );
 }
