@@ -215,7 +215,6 @@ const refreshToken = async (req, res) => {
         const refreshToken = req.cookies.refreshToken;
 
         if (!refreshToken) {
-            console.log("No refresh token provided 1");
             return res.status(401).json({
                 success: false,
                 message: "Refresh token is required"
@@ -296,7 +295,6 @@ const refreshToken = async (req, res) => {
 const checkAuth = async (req, res) => {
     const token = req.cookies?.accessToken;
     if (!token) {
-        console.log("No access token provided 2");
         return res.status(401).json({
             authenticated: false,
             message: "Try refreshing access token"
@@ -305,10 +303,10 @@ const checkAuth = async (req, res) => {
 
     try {
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        res.json({
+        res.status(200).json({
             authenticated: true,
             user: decoded,
-            success: true
+            message: "User is authenticated"
         });
     } catch (err) {
         if (err.name === 'TokenExpiredError') {
