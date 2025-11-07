@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./src/config/connectDB');
 const cors = require('cors');
-const { swaggerUi, specs } = require('./src/config/swagger');
+const { swaggerUi, specs, swaggerOptions } = require('./src/config/swagger');
 
 const app = express();
 const PORT = 5000;
@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 console.log("Swagger specs generated:", !!specs);
 console.log("OpenAPI version:", specs?.openapi)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
 app.use("/api/auth", require(path.join(__dirname, "src", "routes", "authRoutes.js")));
 app.use('/api/posts', require(path.join(__dirname, 'src', 'routes', 'postRoutes')));

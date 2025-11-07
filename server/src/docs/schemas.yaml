@@ -1,0 +1,204 @@
+# server/src/docs/schemas.yaml
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - email
+        - password
+      properties:
+        _id:
+          type: string
+          description: The auto-generated user ID
+          example: "507f1f77bcf86cd799439012"
+        username:
+          type: string
+          minLength: 3
+          maxLength: 15
+          description: User's username
+          example: "john_doe"
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: "john@example.com"
+        password:
+          type: string
+          format: password
+          minLength: 6
+          description: User's password (hashed in response)
+          example: "hashedpassword123"
+        refreshToken:
+          type: string
+          description: JWT refresh token
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        createdAt:
+          type: string
+          format: date-time
+          description: User creation timestamp
+          example: "2024-01-15T10:30:00.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: User last update timestamp
+          example: "2024-01-15T10:30:00.000Z"
+
+    Post:
+      type: object
+      required:
+        - title
+        - content
+        - author
+      properties:
+        _id:
+          type: string
+          description: The auto-generated post ID
+          example: "507f1f77bcf86cd799439011"
+        title:
+          type: string
+          maxLength: 100
+          description: Post title
+          example: "Understanding React Hooks in 2024"
+        content:
+          type: string
+          maxLength: 10000
+          description: Post content
+          example: "React hooks have revolutionized how we write functional components..."
+        introduction:
+          type: string
+          maxLength: 300
+          description: Brief introduction
+          example: "A deep dive into React hooks and modern React development patterns."
+        author:
+          type: string
+          description: Reference to User ID
+          example: "507f1f77bcf86cd799439012"
+        genre:
+          type: string
+          description: Post category/genre
+          example: "technology"
+        created_at:
+          type: string
+          format: date-time
+          description: Post creation timestamp
+          example: "2024-01-15T10:30:00.000Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Post last update timestamp
+          example: "2024-01-15T10:30:00.000Z"
+        likes_count:
+          type: integer
+          description: Number of likes
+          example: 15
+        reposts_count:
+          type: integer
+          description: Number of reposts
+          example: 3
+        comments_count:
+          type: integer
+          description: Number of comments
+          example: 7
+        is_published:
+          type: boolean
+          description: Post publication status
+          example: true
+        visibility:
+          type: string
+          enum: [public, private, friends]
+          description: Post visibility setting
+          example: "public"
+
+    PostWithAuthor:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        introduction:
+          type: string
+        author:
+          $ref: '#/components/schemas/User'
+        genre:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        likes_count:
+          type: integer
+        reposts_count:
+          type: integer
+        comments_count:
+          type: integer
+      example:
+        _id: "507f1f77bcf86cd799439011"
+        title: "Understanding React Hooks in 2024"
+        content: "React hooks have revolutionized how we write functional components..."
+        introduction: "A deep dive into React hooks and modern React development patterns."
+        author:
+          _id: "507f1f77bcf86cd799439012"
+          username: "john_doe"
+          email: "john@example.com"
+        genre: "technology"
+        created_at: "2024-01-15T10:30:00.000Z"
+        updated_at: "2024-01-15T10:30:00.000Z"
+        likes_count: 15
+        reposts_count: 3
+        comments_count: 7
+
+    CreatePostRequest:
+      type: object
+      required:
+        - title
+        - content
+        - genre
+        - introduction
+      properties:
+        title:
+          type: string
+          maxLength: 100
+          example: "Understanding React Hooks in 2024"
+        content:
+          type: string
+          maxLength: 10000
+          example: "React hooks have revolutionized how we write functional components..."
+        genre:
+          type: string
+          enum: [technology, politics, health, environment, sports, general]
+          example: "technology"
+        introduction:
+          type: string
+          maxLength: 300
+          example: "A deep dive into React hooks and modern React development patterns."
+
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string

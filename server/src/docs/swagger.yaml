@@ -1,0 +1,164 @@
+# server/src/docs/swagger.yaml
+openapi: 3.0.0
+info:
+  title: Blog API
+  version: 1.0.0
+  description: |
+    A complete blogging platform API with authentication, posts, comments, and user management.
+    
+    **Authentication Note:** 
+    This API uses httpOnly cookies for authentication. After login, access tokens are automatically 
+    sent with requests. The bearerAuth security scheme is for documentation purposes only.
+  contact:
+    name: API Support
+    email: support@blogapp.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3000
+    description: Development server
+  - url: https://api.yourblogapp.com
+    description: Production server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization endpoints
+  - name: Posts
+    description: Blog post management endpoints
+  - name: Users
+    description: User profile management endpoints
+  - name: Comments
+    description: Post comments management endpoints
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT access token. 
+        
+        **Note:** Actual implementation uses httpOnly cookies for security.
+        This bearer token scheme is for documentation purposes only.
+
+  responses:
+    UnauthorizedError:
+      description: Not authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Not authenticated"
+
+    ForbiddenError:
+      description: Access forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Access forbidden"
+
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Resource not found"
+
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Validation failed"
+
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Internal server error"
+
+  parameters:
+    IdPathParameter:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource ID
+      example: "507f1f77bcf86cd799439011"
+
+    PageQueryParameter:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Page number for pagination
+
+    LimitQueryParameter:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: Number of items per page
+
+    GenreQueryParameter:
+      name: genre
+      in: query
+      schema:
+        type: string
+        enum: [technology, politics, health, environment, sports, general]
+      description: Filter by post genre
+
+  schemas:
+    # Basic response schemas
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Operation completed successfully"
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "An error occurred"
+
+    # Will be extended by schemas.yaml and route-specific YAML files
+
+externalDocs:
+  description: API Documentation
+  url: https://docs.yourblogapp.com
+
+# Paths will be populated by route YAML files and JSDoc comments
+paths: {}
