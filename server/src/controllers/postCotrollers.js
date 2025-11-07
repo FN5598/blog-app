@@ -5,14 +5,46 @@ const Post = require("../models/postModel");
 //@access Public
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find().populate('author', 'username email');
+        const { genre, page, limit, includeContent = 'false', author } = req.query;
 
-        const postsWithAuthorNames = await Promise.all(posts.map(async (post) => ({
-            ...post.toObject(),
-            author_name: post.author ? post.author.username : "Unknown"
-        })));
+        let query = {};
 
-        if (!postsWithAuthorNames) {
+        if (genre) {
+            query.genre = genre
+        }
+
+        if (author) {
+            query.author = author;
+        }
+
+        const pageNum = parseInt(page);
+        const limitNum = parseInt(limit);
+        const skip = (pageNum - 1) * limitNum
+
+        let projection = '-content';
+
+        if(includeContent === "true") {
+            projection = '';
+        }  
+
+        const posts = await Post.find(query, projection)
+            .populate('author', 'username email')
+            .sort({ created_at: -1 })
+            .skip(skip)
+            .limit(limitNum);
+        const totalPosts = await Post.countDocuments(query);
+        const totalPages = Math.ceil(totalPosts / limitNum);
+
+
+        const postsWithAuthorNames = posts.map((post) => {
+            const postObj = post.toObject();
+            return {
+                ...postObj,
+                author_name: post.author ? post.author.username : "Unknown"
+            };
+        });
+
+        if (!postsWithAuthorNames || postsWithAuthorNames.length === 0) {
             return res.status(404).json({
                 success: false,
                 message: "No posts found"
@@ -21,7 +53,16 @@ const getAllPosts = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            data: postsWithAuthorNames
+            data: postsWithAuthorNames,
+            pagination: {
+                currentPage: pageNum,
+                totalPages: totalPages,
+                totalPosts: totalPosts,
+                postPerPage: limitNum,
+            },
+            filters: {
+                genre: genre || "general"
+            }
         });
     } catch (error) {
         res.status(500).json({ message: "Server error" });

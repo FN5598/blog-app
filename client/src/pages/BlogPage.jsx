@@ -15,7 +15,6 @@ import { PartOfTeamComponent } from "../components/PartOfTeamComponent";
 
 export function BlogPage() {
 
-
     const location = useLocation();
     const pathParts = location.pathname.split('/');
     const blogId = pathParts[pathParts.length - 1];

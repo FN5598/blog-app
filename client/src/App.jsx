@@ -9,6 +9,7 @@ import { LoginPage } from './pages/auth-pages/LoginPage';
 import { CreateAccountPage } from './pages/auth-pages/CreateAccountPage';
 import { ProtectedRoute } from './components/ProtectedRoutes';
 import { CreateBlogPage } from './pages/CreateBlogPage';
+import { BlogAuthorPage } from './pages/BlogAuthorPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
 
         <Route path="/blogs" element={<BlogsPage />} />
         <Route path="/blog/:genre/:id" element={<BlogPage />} />
+        <Route path="/author/:authorUsername/:authorId" element={<BlogAuthorPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<CreateAccountPage />} />
