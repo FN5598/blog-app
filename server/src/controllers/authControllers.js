@@ -162,7 +162,7 @@ const createNewUser = async (req, res) => {
 //@access private
 const logoutUser = async (req, res) => {
     try {
-        const id = req.body;
+        const id = req.user.id;
 
         if (!id) {
             return res.status(400).json({

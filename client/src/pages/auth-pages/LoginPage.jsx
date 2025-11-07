@@ -29,7 +29,7 @@ export function LoginPage() {
         e.preventDefault();
 
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`,
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`,
                 {
                     password,
                     email
@@ -37,6 +37,7 @@ export function LoginPage() {
                 {
                     withCredentials: true
                 });
+            localStorage.setItem("userId", res.data.user.id)
             alert("Login successful!");
             navigate('/');
         } catch (err) {

@@ -43,7 +43,7 @@ export function BlogAuthorPage() {
         <>
             <HeaderComponent />
             {blogs ? blogs.map(blog => (
-                <OneBlogComponent blog={blog} key={blog._id} />
+                <OneBlogComponent blog={blog} setBlogs={setBlogs} key={blog._id} />
             )) :
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", gap: "30px", marginBottom: "50px" }}>
                     <div style={{ color: "white", fontSize: "24px", textAlign: "center", marginTop: "20px" }}>

@@ -1,11 +1,12 @@
 const Post = require("../models/postModel");
+const jwt = require("jsonwebtoken");
 
 //@desc Get all posts
 //@route GET /api/posts
 //@access Public
 const getAllPosts = async (req, res) => {
     try {
-        const { genre, page, limit, includeContent = 'false', author } = req.query;
+        const { genre, page, limit, includeContent = 'false', author, blog_id, user_id, includeLikes = 'false' } = req.query;
 
         let query = {};
 
@@ -21,11 +22,35 @@ const getAllPosts = async (req, res) => {
         const limitNum = parseInt(limit);
         const skip = (pageNum - 1) * limitNum
 
-        let projection = '-content';
+        let projection = '-content -likes';
 
-        if(includeContent === "true") {
+        if (includeContent === "true") {
             projection = '';
-        }  
+        }
+
+        if (includeLikes === "true") {
+            projection = '';
+        }
+
+        if (blog_id && user_id) {
+            const post = await Post.findById(blog_id);
+            if (!post) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Failed to find post id:", blog_id
+                })
+            }
+            const userLiked = post.likes.includes(user_id);
+            const totalLikes = post.likes.length
+            if (userLiked) {
+                return res.status(200).json({
+                    success: true,
+                    message: "User liked post:", blog_id,
+                    isLiked: true,
+                    totalLikes: totalLikes
+                })
+            }
+        }
 
         const posts = await Post.find(query, projection)
             .populate('author', 'username email')
@@ -114,6 +139,38 @@ const createPost = async (req, res) => {
 //@access Private
 const updatePost = async (req, res) => {
     const { title, content, introduction } = req.body;
+    const { like } = req.query;
+
+    if (like) {
+        console.log(req.params.id)
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found"
+            });
+        }
+
+        const userAlreadyLiked = post.likes.includes(req.user.id);
+
+        if (userAlreadyLiked) {
+            post.likes = post.likes.filter(userId => userId.toString() !== req.user.id);
+        } else {
+            post.likes.push(req.user.id);
+        }
+
+        post.likes_count = post.likes.length || 0;
+        await post.save();
+
+        const totalLikes = post.likes.length;
+
+        return res.status(200).json({
+            success: true,
+            liked: !userAlreadyLiked,
+            totalLikes: totalLikes,
+            message: userAlreadyLiked ? "Successfully unliked the post" : "Successfully liked the post",
+        })
+    }
 
     if (!title && !content && !introduction) {
         return res.status(400).json({

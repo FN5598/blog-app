@@ -1,10 +1,10 @@
 import "./ProtectedRoutes.css";
-import { checkAuth } from '../utils/checkAuth';
 import { useEffect, useState } from 'react';
 import exclamationMark from '/Exclamation-mark.png';
 import closeIcon from '/Close.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { HeaderComponent } from "./HeaderComponent";
+import { checkAuth } from "../utils/checkAuth";
 
 export function ProtectedRoute({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -13,10 +13,8 @@ export function ProtectedRoute({ children }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        (async () => {
-            const auth = await checkAuth();
-            setIsAuthenticated(auth);
-        })();
+        const isAuth = checkAuth();
+        setIsAuthenticated(isAuth);
     }, []);
     if (isAuthenticated === null) return <div>Loading...</div>;
 

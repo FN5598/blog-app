@@ -109,6 +109,7 @@
     align-items: center;
 }
 
+.like-button-filled,
 .like-button,
 .comment-button,
 .reposts-button {
@@ -121,6 +122,7 @@
     position: relative;
     max-height: 40px;
     min-width: 80px;
+    cursor: pointer;
 }
 
 .comment-button {
@@ -139,6 +141,7 @@
     transform: translateY(-50%);
 }
 
+.like-button-filled,
 .like-button {
     padding-left: 34px;
 }
@@ -146,6 +149,18 @@
 .like-button:before {
     content: '';
     background-image: url('/Like-empty.png');
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.like-button-filled::before {
+    content: '';
+    background-image: url('/Like-filled.png');
     width: 24px;
     height: 24px;
     object-fit: cover;
@@ -293,6 +308,7 @@
         flex: 1;
     }
 
+    .like-button-filled,
     .like-button,
     .comment-button,
     .reposts-button {
@@ -313,10 +329,12 @@
         left: 10px;
     }
 
+    .like-button-filled,
     .like-button {
         padding-left: 36px;
     }
 
+    .like-button-filled:before,
     .like-button:before {
         width: 24px;
         height: 24px;
@@ -389,6 +407,7 @@
     .user-information {
         gap: 15px;
         flex: 0 0 auto;
+        width: 190px;
     }
 
     .blog-date {
@@ -411,6 +430,7 @@
         justify-content: flex-start;
     }
 
+    .like-button-filled,
     .like-button,
     .comment-button,
     .reposts-button {
@@ -431,10 +451,12 @@
         left: 10%;
     }
 
+    .like-button-filled,
     .like-button {
         padding-left: 40px;
     }
 
+    .like-button-filled:before,
     .like-button:before {
         width: 24px;
         height: 24px;
@@ -455,7 +477,7 @@
         padding: 12px 38px 12px 18px;
         font-size: 16px;
         height: 89px;
-        width: 240px;
+        max-width: 200px;
     }
 
     .view-blog-button::after {

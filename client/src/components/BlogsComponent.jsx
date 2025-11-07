@@ -78,7 +78,7 @@ export function BlogsComponent() {
             </div>
             {(blogs.length > 0) ? (blogs.map(blog => {
                 return (
-                    <OneBlogComponent blog={blog} key={blog._id} />
+                    <OneBlogComponent blog={blog} setBlogs={setBlogs} key={blog._id} />
                 )
             })) : (
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px", gap: "30px", marginBottom: "50px" }}>
