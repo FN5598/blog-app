@@ -13,10 +13,12 @@ export function HeaderComponent() {
 
 
     useEffect(() => {
-        const isAuth = checkAuth();
-        setAuth(isAuth);
+        const verifyAuth = async () => {
+            const isAuth = await checkAuth();            
+            setAuth(isAuth);
+        };
+        verifyAuth();
     }, []);
-
 
     const handleButtonClick = (path) => {
         navigate(path);

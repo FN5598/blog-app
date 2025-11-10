@@ -2,11 +2,13 @@ import defaultImg from "/Fuckass.png"
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { CommentComponent } from "./CommentComponent";
 
 export function OneBlogComponent({ blog, setBlogs }) {
 
     const [liked, setLiked] = useState(false);
     const [totalLikes, setTotallikes] = useState(null);
+    const [showComments, setShowComments] = useState(false);
 
     const navigate = useNavigate();
     const userId = localStorage.getItem("userId")
@@ -93,7 +95,7 @@ export function OneBlogComponent({ blog, setBlogs }) {
     }
 
     function handleCommentButton() {
-
+        setShowComments(true);
     }
 
     function handleRepostButton() {
@@ -133,6 +135,10 @@ export function OneBlogComponent({ blog, setBlogs }) {
                         onClick={handleRepostButton}
                     >{blog.reposts_count}</button>
                 </div>
+                {showComments && (
+                    <CommentComponent postId={blog._id}/>
+                )}
+
             </div>
             <button
                 className="view-blog-button"

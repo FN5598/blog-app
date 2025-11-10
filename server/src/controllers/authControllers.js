@@ -217,7 +217,8 @@ const refreshToken = async (req, res) => {
         if (!refreshToken) {
             return res.status(401).json({
                 success: false,
-                message: "Refresh token is required"
+                message: "Refresh token is required",
+                authenticated: false
             });
         }
 
@@ -228,7 +229,8 @@ const refreshToken = async (req, res) => {
             console.log("Invalid refresh token:", err);
             return res.status(403).json({
                 success: false,
-                message: "Invalid or expired refresh token"
+                message: "Invalid or expired refresh token",
+                authenticated: false
             });
         }
         const user = await User.findById(decoded.id);
@@ -236,14 +238,16 @@ const refreshToken = async (req, res) => {
             console.log("User not found for refresh token");
             return res.status(404).json({
                 success: false,
-                message: "User not found"
+                message: "User not found",
+                authenticated: false
             });
         }
 
         if (!user.refreshToken) {
             return res.status(403).json({
                 success: false,
-                message: "Refresh token revoked"
+                message: "Refresh token revoked",
+                authenticated: false
             });
         }
 
@@ -252,7 +256,8 @@ const refreshToken = async (req, res) => {
             console.log("Refresh token does not match stored hash");
             return res.status(403).json({
                 success: false,
-                message: "Invalid refresh token"
+                message: "Invalid refresh token",
+                authenticated: false
             });
         }
 
@@ -277,14 +282,16 @@ const refreshToken = async (req, res) => {
             user: {
                 id: user._id,
                 email: user.email
-            }
+            },
+            authenticated: true
         });
     } catch (err) {
         console.log("Refresh token error", err);
         res.status(500).json({
             success: false,
             message: "Failed to refresh user token",
-            error: err.message
+            error: err.message,
+            authenticated: false
         });
     }
 }

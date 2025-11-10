@@ -5,7 +5,10 @@ export async function checkAuth() {
     const tempRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/refresh`, {}, {
       withCredentials: true,
     });
-    console.log("Refresh response:", tempRes.data);
+    if (tempRes.data?.authenticated === false) {
+      return tempRes.data.authenticated
+    }
+    console.log("Refresh response:", tempRes.data.authenticated);
     await new Promise((r) => setTimeout(r, 100));
 
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/check-auth`, {
@@ -14,7 +17,11 @@ export async function checkAuth() {
 
     return res.data.authenticated;
   } catch (err) {
-    console.error("Auth check failed:", err);
+    if (err.response?.data?.message) {
+      console.error("Auth check failed:", err.response.data.message);
+    } else {
+      console.error("Auth check failed");
+    }
     return false;
   }
 }

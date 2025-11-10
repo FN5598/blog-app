@@ -23,8 +23,9 @@ console.log("Swagger specs generated:", !!specs);
 console.log("OpenAPI version:", specs?.openapi)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, swaggerOptions));
 
-app.use("/api/auth", require(path.join(__dirname, "src", "routes", "authRoutes.js")));
+app.use("/api/auth", require(path.join(__dirname, "src", "routes", "authRoutes")));
 app.use('/api/posts', require(path.join(__dirname, 'src', 'routes', 'postRoutes')));
+app.use("/api/post", require(path.join(__dirname, "src", "routes", "commentRoutes")));
 
 app.listen(PORT, () => {
     console.log("Server running on Port:", PORT);
