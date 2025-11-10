@@ -27,7 +27,8 @@ export function CreateBlogPage() {
         }
     }
 
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault();
         try {
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/posts/`,
                 {
