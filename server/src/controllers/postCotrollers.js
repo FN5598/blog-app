@@ -32,6 +32,22 @@ const getAllPosts = async (req, res) => {
             projection = '';
         }
 
+        if (blog_id) {
+            const post = await Post.findById(blog_id);
+            if (!post) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Failed to find post id:", blog_id
+                })
+            }
+
+            const totalLikes = post.likes.length;
+            return res.status(200).json({
+                success: true,
+                totalLikes: totalLikes
+            })
+        }
+
         if (blog_id && user_id) {
             const post = await Post.findById(blog_id);
             if (!post) {

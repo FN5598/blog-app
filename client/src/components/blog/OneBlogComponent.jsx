@@ -8,33 +8,28 @@ import { toast } from 'react-toastify';
 export function OneBlogComponent({ blog, setBlogs }) {
 
     const [liked, setLiked] = useState(false);
-    const [totalLikes, setTotallikes] = useState(null);
+    const [totalLikes, setTotalLikes] = useState(null);
     const [showComments, setShowComments] = useState(false);
 
     const navigate = useNavigate();
     const userId = localStorage.getItem("userId")
 
     useEffect(() => {
-        async function getUserBlogLike() {
+        async function fetchLikes() {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts?likes=true&user_id=${userId}&blog_id=${blog._id}`, { withCredentials: true });
-                if (res.data?.isLiked) {
-                    setLiked(res.data.isLiked);
-                    setTotallikes(res.data.totalLikes)
-                } else {
-                    setLiked(false);
-                }
+                setLiked(res.data?.isLiked || false);
+                setTotalLikes(res.data?.totalLikes || 0);
             } catch (err) {
-                if (err.response?.data?.message) {
-                    return console.log(err.response.data.message);
-                } else {
-                    return console.log("Error fetching user liked posts")
-                }
+                console.log(err.response?.data?.message || "Error fetching likes");
+                setLiked(false);
+                setTotalLikes(0);
             }
         }
-
-        getUserBlogLike();
+        fetchLikes();
     }, [blog._id, userId]);
+
+
 
     async function updateLikes(blogId) {
         try {
@@ -100,7 +95,7 @@ export function OneBlogComponent({ blog, setBlogs }) {
                         }
                         : blog
                 ))
-                setTotallikes(res.data.totalLikes);
+                setTotalLikes(res.data.totalLikes);
             }
             setLiked(res.data.liked);
 
@@ -160,9 +155,9 @@ export function OneBlogComponent({ blog, setBlogs }) {
                 onClick={() => handleButtonClick(blog._id)}
             >View Blog</button>
             {showComments && (
-                <CommentComponent 
-                className="comments-container"
-                postId={blog._id} />
+                <CommentComponent
+                    className="comments-container"
+                    postId={blog._id} />
             )}
         </div>
     )

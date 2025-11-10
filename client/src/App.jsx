@@ -3,7 +3,6 @@ import { HomePage } from './pages/HomePage';
 import { ContactUsPage } from './pages/ContactUsPage';
 import { BlogsPage } from './pages/blog-pages/BlogsPage';
 import { BlogPage } from './pages/blog-pages/BlogPage';
-import { LastLikedBlogPage } from './pages/blog-pages/LastLikedBlogPage';
 import { LoginPage } from './pages/auth-pages/LoginPage';
 import { CreateAccountPage } from './pages/auth-pages/CreateAccountPage';
 import { ProtectedRoute } from './components/main/ProtectedRoutes';
@@ -37,13 +36,6 @@ function App() {
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<CreateAccountPage />} />
-
-          <Route path='last-liked'
-            element={
-              <ProtectedRoute>
-                <LastLikedBlogPage />
-              </ProtectedRoute>
-            } />
 
           <Route path='create-blog'
             element={

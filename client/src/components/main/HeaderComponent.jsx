@@ -76,11 +76,6 @@ export function HeaderComponent() {
                     onClick={() => handleButtonClick('/blogs')}
                 >Blogs</button>
                 <button
-                    name="last-visited"
-                    className={location.pathname === '/last-liked' ? 'active-button' : 'button'}
-                    onClick={() => handleProtectedRouteClick('/last-liked')}
-                >Last liked</button>
-                <button
                     className={location.pathname === '/create-blog' ? 'active-button' : 'button'}
                     onClick={() => handleProtectedRouteClick('/create-blog')}
                 >Create Blog</button>
