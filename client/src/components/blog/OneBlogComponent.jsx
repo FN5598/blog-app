@@ -154,15 +154,16 @@ export function OneBlogComponent({ blog, setBlogs }) {
                         onClick={handleRepostButton}
                     >{blog.reposts_count}</button>
                 </div>
-                {showComments && (
-                    <CommentComponent postId={blog._id} />
-                )}
-
             </div>
             <button
                 className="view-blog-button"
                 onClick={() => handleButtonClick(blog._id)}
             >View Blog</button>
+            {showComments && (
+                <CommentComponent 
+                className="comments-container"
+                postId={blog._id} />
+            )}
         </div>
     )
 }

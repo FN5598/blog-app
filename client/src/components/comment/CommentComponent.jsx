@@ -69,14 +69,7 @@ export function CommentComponent({ postId }) {
 
     return (
         <div className="comment-component">
-            {!isExpanded ? (
-                <button
-                    className="add-comment-btn"
-                    onClick={() => setIsExpanded(true)}
-                >
-                    💬 Add Comment
-                </button>
-            ) : (
+            {!isExpanded && (
                 <>
                     <form className="comment-form" onSubmit={handleSubmit}>
                         <textarea

@@ -1,8 +1,7 @@
 .comments-section {
-    background: #000;
+    background: transparent;
     color: white;
     padding: 16px;
-    border-top: 1px solid #2f2f2f;
 }
 
 .comments-header h3 {
@@ -15,6 +14,9 @@
     display: flex;
     margin-bottom: 16px;
     padding: 8px 0;
+    background-color: rgb(25,25,25);
+    align-items: center;
+    padding-left: 20px;
 }
 
 .comment-avatar {
@@ -31,12 +33,15 @@
 
 .comment-content {
     flex: 1;
+    align-items: center;
+    color: white;
 }
 
 .comment-header {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
+    color: rgb(97,97,100);
 }
 
 .username {
@@ -46,7 +51,7 @@
 }
 
 .comment-time {
-    color: #717171;
+    color: rgb(102,102,102);
     font-size: 12px;
 }
 
@@ -60,43 +65,4 @@
     display: flex;
     align-items: center;
     gap: 16px;
-}
-
-.like-btn, .reply-btn {
-    background: none;
-    border: none;
-    color: #717171;
-    font-size: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-
-.like-btn:hover, .reply-btn:hover {
-    background: #1f1f1f;
-    color: white;
-}
-
-.replies-section {
-    margin-top: 12px;
-    padding-left: 12px;
-    border-left: 2px solid #2f2f2f;
-}
-
-.reply-item {
-    display: flex;
-    margin-bottom: 12px;
-}
-
-.reply-item .avatar {
-    width: 32px;
-    height: 32px;
-}
-
-.reply-content {
-    flex: 1;
-    margin-left: 8px;
 }
