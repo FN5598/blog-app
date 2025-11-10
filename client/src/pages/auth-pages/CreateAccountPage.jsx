@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import visiblePasswordIcon from '/Visible-password.png'
+import { toast } from 'react-toastify';
 
 export function CreateAccountPage() {
 
@@ -37,17 +38,53 @@ export function CreateAccountPage() {
                     withCredentials: true
                 });
             if (res.data.success) {
-                alert("Successfully Created New Account. Please Login to verify");
+                toast.success("Successfully Created New Account. Please Login to verify", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
                 navigate('/login');
             } else {
-                alert(res.data.message || "Login failed");
+                toast.warn(`${res.data.message}` || "Login failed", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         } catch (err) {
             console.log("Error creating new account:", err);
             if (err.response?.data?.message) {
-                alert(err.response.data.message)
+                toast.error(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             } else {
-                alert("Failed to create new account");
+                toast.error("Failed to create new account", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             }
         }
     }

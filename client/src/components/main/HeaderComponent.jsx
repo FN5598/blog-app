@@ -4,6 +4,7 @@ import logo from "/Logo.png";
 import axios from 'axios';
 import { checkAuth } from '../../utils/checkAuth';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export function HeaderComponent() {
 
@@ -11,17 +12,35 @@ export function HeaderComponent() {
     const location = useLocation();
     const [auth, setAuth] = useState(null);
 
+    const verifyAuth = async () => {
+        const isAuth = await checkAuth();
+        setAuth(isAuth);
+    };
 
     useEffect(() => {
-        const verifyAuth = async () => {
-            const isAuth = await checkAuth();            
-            setAuth(isAuth);
-        };
         verifyAuth();
     }, []);
 
     const handleButtonClick = (path) => {
         navigate(path);
+    }
+
+    const handleProtectedRouteClick = async (path) => {
+        verifyAuth();
+        if (auth) {
+            navigate(path);
+        } else {
+            toast.warn("Cannot access the page", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
     async function handleLogout() {
@@ -63,11 +82,11 @@ export function HeaderComponent() {
                 <button
                     name="last-visited"
                     className={location.pathname === '/last-visited' ? 'active-button' : 'button'}
-                    onClick={() => handleButtonClick('/last-visited')}
+                    onClick={() => handleProtectedRouteClick('/last-visited')}
                 >Last visited</button>
                 <button
                     className={location.pathname === '/create-blog' ? 'active-button' : 'button'}
-                    onClick={() => handleButtonClick('/create-blog')}
+                    onClick={() => handleProtectedRouteClick('/create-blog')}
                 >Create Blog</button>
             </div>
             <button

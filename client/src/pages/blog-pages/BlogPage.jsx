@@ -12,6 +12,7 @@ import Environment from "/Enviroment-background.jpg";
 import Sports from "/Sports-background.jpg";
 import General from "/General-background.jpg";
 import { PartOfTeamComponent } from "../../components//PartOfTeamComponent";
+import { toast } from 'react-toastify';
 
 export function BlogPage() {
 
@@ -32,9 +33,27 @@ export function BlogPage() {
                 console.log(res.data);
             } catch (err) {
                 if (err.response?.data?.message)
-                    alert(err.response.data.message);
+                    toast.error(`${err.response.data.message}`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark"
+                    });
                 else
-                    alert("An error occurred while fetching the blog.");
+                    toast.error(`An error occurred while fetching the blog.`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark"
+                    });
             } finally {
                 setLoading(false);
             }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { CommentComponent } from "../comment/CommentComponent";
+import { toast } from 'react-toastify';
 
 export function OneBlogComponent({ blog, setBlogs }) {
 
@@ -44,9 +45,27 @@ export function OneBlogComponent({ blog, setBlogs }) {
             navigate(`/blog/${(res.data.data.genre.toLowerCase())}/${blogId}`, { state: { blog: res.data.data } });
         } catch (err) {
             if (err.response?.data?.message)
-                alert(err.response.data.message);
+                toast.warn(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             else
-                alert("An error occurred while fetching the blog.");
+                toast.warn(`An error occurred while fetching the blog.`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
         }
     }
 
@@ -136,7 +155,7 @@ export function OneBlogComponent({ blog, setBlogs }) {
                     >{blog.reposts_count}</button>
                 </div>
                 {showComments && (
-                    <CommentComponent postId={blog._id}/>
+                    <CommentComponent postId={blog._id} />
                 )}
 
             </div>

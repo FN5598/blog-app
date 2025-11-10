@@ -5,6 +5,7 @@ import { OneBlogComponent } from '../../components/blog/OneBlogComponent';
 import { ThreeDot } from 'react-loading-indicators';
 import { HeaderComponent } from '../../components/main/HeaderComponent';
 import { FooterComponent } from '../../components/main/FooterComponent';
+import { toast } from 'react-toastify';
 
 export function BlogAuthorPage() {
 
@@ -32,9 +33,27 @@ export function BlogAuthorPage() {
             console.log(response.data.data);
         } catch (err) {
             if (err.response?.data?.message) {
-                alert(err.response.data.message);
+                toast.error(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             } else {
-                alert("An error occurred while fetching blogs.");
+                toast.error(`An error occurred while fetching blogs.`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             }
         }
     }

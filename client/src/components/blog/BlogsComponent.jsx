@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ThreeDot } from "react-loading-indicators";
 import { OneBlogComponent } from "./OneBlogComponent";
+import { toast } from 'react-toastify';
 
 export function BlogsComponent() {
 
@@ -30,9 +31,27 @@ export function BlogsComponent() {
             console.log(response.data.data);
         } catch (err) {
             if (err.response?.data?.message) {
-                alert(err.response.data.message);
+                toast.warn(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             } else {
-                alert("An error occurred while fetching blogs.");
+                toast.warn(`An error occurred while fetching blogs.`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         }
     }

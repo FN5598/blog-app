@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import visiblePasswordIcon from '/Visible-password.png'
+import { toast } from 'react-toastify';
 
 export function LoginPage() {
 
@@ -38,14 +39,41 @@ export function LoginPage() {
                     withCredentials: true
                 });
             localStorage.setItem("userId", res.data.user.id)
-            alert("Login successful!");
+            toast.success("Login successful!", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
             navigate('/');
         } catch (err) {
             console.log(err);
             if (err.response?.data?.message) {
-                alert(err.response.data.message);
+                toast.error(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             } else {
-                alert("Login failed. Please try again");
+                toast.error("Login failed. Please try again", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             }
         }
     }

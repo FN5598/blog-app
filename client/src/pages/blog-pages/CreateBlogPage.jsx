@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../components/main/HeaderComponent';
 import { FooterComponent } from '../../components/main/FooterComponent';
 import { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export function CreateBlogPage() {
 
@@ -38,12 +39,39 @@ export function CreateBlogPage() {
                 withCredentials: true
             });
             console.log(res.data.data);
-            alert(res.data.success);
+            toast.success(`${res.data.success}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
         } catch (err) {
             if (err.response?.data?.message) {
-                alert(err.response.data.message)
+                toast.success(`${err.response.data.message}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             } else {
-                alert("Error handling submit button");
+                toast.success("Error handling submit button", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark"
+                });
             }
         }
     }
@@ -114,10 +142,10 @@ export function CreateBlogPage() {
                     </div>
 
                 </div>
-                <button 
-                type="submit" 
-                className="create-blog-submit-button"
-                onClick={handleSubmit}
+                <button
+                    type="submit"
+                    className="create-blog-submit-button"
+                    onClick={handleSubmit}
                 >Submit Blog</button>
             </form>
             <FooterComponent />
