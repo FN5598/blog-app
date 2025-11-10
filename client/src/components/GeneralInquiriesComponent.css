@@ -1,0 +1,231 @@
+.general-inquiries-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+.general-inquiries-container h1 {
+    font-size: 24px;
+    color: white;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
+    font-weight: 500;
+}
+
+.our-office,
+.technical-support,
+.general-inquiries {
+    border-right: 1px solid rgb(51, 51, 51);
+}
+
+.general-inquiries,
+.technical-support,
+.our-office,
+.connect-with-us {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: transparent;
+    flex: 1;
+    min-width: 300px;
+    box-sizing: border-box;
+}
+
+.our-office button,
+.technical-support button,
+.general-inquiries button,
+.connect-with-us button {
+    border-radius: 8px;
+    padding: 10px 40px 10px 20px;
+    font-size: 16px;
+    border: 1px solid rgb(51, 51, 51);
+    color: #98989A;
+    background-color: rgb(25, 25, 25);
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+}
+
+.connect-with-us button {
+    padding: 10px 20px;
+}
+
+.our-office button:hover,
+.technical-support button:hover,
+.general-inquiries button:hover,
+.connect-with-us button:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.our-office button::after,
+.technical-support button::after,
+.general-inquiries button::after {
+    content: '';
+    position: absolute;
+    background-image: url("/Navigate.png");
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.connect-with-us p,
+.our-office p {
+    color: #98989A;
+}
+
+.media-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Tablet Styles (768px - 1024px) */
+@media (max-width: 1199px) {
+
+    .general-inquiries,
+    .technical-support,
+    .our-office,
+    .connect-with-us {
+        padding: 30px 25px;
+        min-width: 250px;
+    }
+
+    .general-inquiries-container h1 {
+        font-size: 22px;
+    }
+
+    .our-office button,
+    .technical-support button,
+    .general-inquiries button,
+    .connect-with-us button {
+        padding: 10px 35px 10px 15px;
+        font-size: 15px;
+        max-width: 240px;
+    }
+
+    .media-container {
+        gap: 15px;
+    }
+
+    .connect-with-us button {
+        padding: 10px 20px;
+        width: 70px;
+    }
+}
+
+/* Mobile Landscape (576px - 768px) */
+@media (max-width: 768px) {
+
+    .our-office,
+    .technical-support,
+    .general-inquiries {
+        border-right: none;
+        border-bottom: 1px solid rgb(51, 51, 51);
+    }
+
+    .general-inquiries,
+    .technical-support,
+    .our-office,
+    .connect-with-us {
+        padding: 25px 20px;
+        min-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .general-inquiries-container h1 {
+        font-size: 20px;
+    }
+
+    .our-office button,
+    .technical-support button,
+    .general-inquiries button,
+    .connect-with-us button {
+        padding: 12px 30px 12px 15px;
+        font-size: 14px;
+        max-width: 220px;
+        justify-content: center;
+    }
+
+    .media-container {
+        justify-content: center;
+        gap: 12px;
+    }
+}
+
+/* Mobile Portrait (up to 576px) */
+@media (max-width: 576px) {
+    .general-inquiries-container {
+        padding: 0 10px;
+    }
+
+    .general-inquiries,
+    .technical-support,
+    .our-office,
+    .connect-with-us {
+        padding: 20px 15px;
+    }
+
+    .general-inquiries-container h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .our-office button,
+    .technical-support button,
+    .general-inquiries button,
+    .connect-with-us button {
+        padding: 10px 25px 10px 15px;
+        font-size: 13px;
+        max-width: 200px;
+    }
+
+    .media-container {
+        gap: 10px;
+    }
+
+    .our-office button::after,
+    .technical-support button::after,
+    .general-inquiries button::after {
+        width: 16px;
+        height: 16px;
+        right: 8px;
+    }
+}
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+
+    .general-inquiries,
+    .technical-support,
+    .our-office,
+    .connect-with-us {
+        padding: 40px 60px;
+    }
+
+    .connect-with-us button {
+        padding: 10px 20px;
+        width: 70px;
+    }
+}
+
+/* Extra Large Desktop (1600px+) */
+@media (min-width: 1600px) {
+
+    .general-inquiries,
+    .technical-support,
+    .our-office,
+    .connect-with-us {
+        padding: 40px 80px;
+    }
+}
