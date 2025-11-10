@@ -5,20 +5,19 @@ import { ThreeDot } from "react-loading-indicators";
 import { OneBlogComponent } from "./OneBlogComponent";
 import { toast } from 'react-toastify';
 
-export function BlogsComponent() {
+export function BlogsComponent({ limit}) {
 
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetchBlogs();
-    }, []);
+        fetchBlogs(undefined, limit);
+    }, [limit]);
 
 
     async function fetchBlogs(genre, limit, author) {
         const params = new URLSearchParams();
         if (genre) params.append('genre', genre);
         if (limit) params.append('limit', limit)
-        else limit = 10
         if (author) params.append('author', author)
 
         const url = `${import.meta.env.VITE_API_URL}/api/posts?${params.toString()}`;
@@ -59,7 +58,7 @@ export function BlogsComponent() {
 
     async function handleTagClick(e) {
         const { name } = e.target;
-        fetchBlogs(name);
+        fetchBlogs(name, limit);
     }
 
     return (

@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { AboutUsPage } from './pages/AboutUsPage';
 import { ContactUsPage } from './pages/ContactUsPage';
 import { BlogsPage } from './pages/blog-pages/BlogsPage';
 import { BlogPage } from './pages/blog-pages/BlogPage';
-import { LastVisitedBlogPage } from './pages/blog-pages/LastVisitedBlogPage';
+import { LastLikedBlogPage } from './pages/blog-pages/LastLikedBlogPage';
 import { LoginPage } from './pages/auth-pages/LoginPage';
 import { CreateAccountPage } from './pages/auth-pages/CreateAccountPage';
 import { ProtectedRoute } from './components/main/ProtectedRoutes';
@@ -30,7 +29,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
 
           <Route path="/blogs" element={<BlogsPage />} />
@@ -40,10 +38,10 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<CreateAccountPage />} />
 
-          <Route path='last-visited'
+          <Route path='last-liked'
             element={
               <ProtectedRoute>
-                <LastVisitedBlogPage />
+                <LastLikedBlogPage />
               </ProtectedRoute>
             } />
 

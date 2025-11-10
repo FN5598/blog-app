@@ -100,7 +100,7 @@ export function CreateBlogPage() {
 
                     <div className="create-blog-introduction-input-container">
                         <label htmlFor="introduction">Introduction:</label>
-                        <input
+                        <textarea
                             type="text"
                             id="introduction"
                             name="introduction"
@@ -130,7 +130,7 @@ export function CreateBlogPage() {
 
                     <div className="create-blog-content-input-container">
                         <label htmlFor="content">Content:</label>
-                        <input
+                        <textarea
                             type="text"
                             id="content"
                             name="content"

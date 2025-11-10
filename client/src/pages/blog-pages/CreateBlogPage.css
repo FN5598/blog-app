@@ -21,17 +21,19 @@
     font-size: 40px;
     font-weight: 200;
     margin-top: 20px;
+    text-align: center;
 }
 
 .create-blog-inputs-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    align-items: center;
+
 }
 
 .title-genre-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     justify-content: space-around;
 }
 
@@ -50,8 +52,8 @@
     margin: 0 auto;
 }
 
-.create-blog-content-input-container input,
-.create-blog-introduction-input-container input,
+.create-blog-content-input-container textarea,
+.create-blog-introduction-input-container textarea,
 .create-blog-genre-selector-container select,
 .create-blog-title-input-container input {
     background-color: transparent;

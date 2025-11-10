@@ -30,7 +30,7 @@ export function HeaderComponent() {
         if (auth) {
             navigate(path);
         } else {
-            toast.warn("Cannot access the page", {
+            toast.warn("Cannot access the page. Please Login", {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -72,18 +72,14 @@ export function HeaderComponent() {
                     onClick={() => handleButtonClick("/")}
                 >Home</button>
                 <button
-                    className={location.pathname === '/about-us' ? 'active-button' : 'button'}
-                    onClick={() => handleButtonClick('/about-us')}
-                >About</button>
-                <button
                     className={location.pathname === '/blogs' ? 'active-button' : 'button'}
                     onClick={() => handleButtonClick('/blogs')}
                 >Blogs</button>
                 <button
                     name="last-visited"
-                    className={location.pathname === '/last-visited' ? 'active-button' : 'button'}
-                    onClick={() => handleProtectedRouteClick('/last-visited')}
-                >Last visited</button>
+                    className={location.pathname === '/last-liked' ? 'active-button' : 'button'}
+                    onClick={() => handleProtectedRouteClick('/last-liked')}
+                >Last liked</button>
                 <button
                     className={location.pathname === '/create-blog' ? 'active-button' : 'button'}
                     onClick={() => handleProtectedRouteClick('/create-blog')}
