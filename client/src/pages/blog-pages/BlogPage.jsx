@@ -1,5 +1,5 @@
-import { HeaderComponent } from "../components/HeaderComponent";
-import { FooterComponent } from "../components/FooterComponent";
+import { HeaderComponent } from "../../components/main/HeaderComponent";
+import { FooterComponent } from "../../components/main/FooterComponent";
 import "./BlogPage.css";
 import { ThreeDot } from "react-loading-indicators";
 import axios from 'axios';
@@ -11,7 +11,7 @@ import Health from "/Health-background.jpg";
 import Environment from "/Enviroment-background.jpg";
 import Sports from "/Sports-background.jpg";
 import General from "/General-background.jpg";
-import { PartOfTeamComponent } from "../components/PartOfTeamComponent";
+import { PartOfTeamComponent } from "../../components//PartOfTeamComponent";
 
 export function BlogPage() {
 

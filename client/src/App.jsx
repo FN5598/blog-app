@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage';
 import { ContactUsPage } from './pages/ContactUsPage';
-import { BlogsPage } from './pages/BlogsPage';
-import { BlogPage } from './pages/BlogPage';
-import { LastVisitedBlog } from './pages/LastVisitedBlog';
+import { BlogsPage } from './pages/blog-pages/BlogsPage';
+import { BlogPage } from './pages/blog-pages/BlogPage';
+import { LastVisitedBlogPage } from './pages/blog-pages/LastVisitedBlogPage';
 import { LoginPage } from './pages/auth-pages/LoginPage';
 import { CreateAccountPage } from './pages/auth-pages/CreateAccountPage';
-import { ProtectedRoute } from './components/ProtectedRoutes';
-import { CreateBlogPage } from './pages/CreateBlogPage';
-import { BlogAuthorPage } from './pages/BlogAuthorPage';
+import { ProtectedRoute } from './components/main/ProtectedRoutes';
+import { CreateBlogPage } from './pages/blog-pages/CreateBlogPage';
+import { BlogAuthorPage } from './pages/blog-pages/BlogAuthorPage';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         <Route path='last-visited'
           element={
             <ProtectedRoute>
-              <LastVisitedBlog />
+              <LastVisitedBlogPage />
             </ProtectedRoute>
           } />
 

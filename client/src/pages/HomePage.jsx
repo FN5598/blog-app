@@ -1,7 +1,7 @@
 import "./HomePage.css";
-import { HeaderComponent } from "../components/HeaderComponent";
+import { HeaderComponent } from "../components/main/HeaderComponent";
 import { DiscoverComponent } from "../components/DiscoverComponent";
-import { FooterComponent } from "../components/FooterComponent"
+import { FooterComponent } from "../components/main/FooterComponent"
 import { PartOfTeamComponent } from "../components/PartOfTeamComponent";
 
 export function HomePage() {

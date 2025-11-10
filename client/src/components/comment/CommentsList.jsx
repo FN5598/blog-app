@@ -1,5 +1,5 @@
 import "./CommentList.css";
-import { formatTimeAgo } from "../utils/formatTimeAgo";
+import { formatTimeAgo } from "../../utils/formatTimeAgo";
 
 export function CommentsList({ comments }) {
     return (

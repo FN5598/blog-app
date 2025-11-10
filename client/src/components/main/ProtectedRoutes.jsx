@@ -4,7 +4,7 @@ import exclamationMark from '/Exclamation-mark.png';
 import closeIcon from '/Close.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { HeaderComponent } from "./HeaderComponent";
-import { checkAuth } from "../utils/checkAuth";
+import { checkAuth } from "../../utils/checkAuth";
 
 export function ProtectedRoute({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(null);

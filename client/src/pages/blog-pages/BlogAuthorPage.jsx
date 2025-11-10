@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { OneBlogComponent } from '../components/OneBlogComponent';
+import { OneBlogComponent } from '../../components/blog/OneBlogComponent';
 import { ThreeDot } from 'react-loading-indicators';
-import { HeaderComponent } from '../components/HeaderComponent';
-import { FooterComponent } from '../components/FooterComponent';
+import { HeaderComponent } from '../../components/main/HeaderComponent';
+import { FooterComponent } from '../../components/main/FooterComponent';
 
 export function BlogAuthorPage() {
 

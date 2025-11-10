@@ -2,7 +2,7 @@ import defaultImg from "/Fuckass.png"
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { CommentComponent } from "./CommentComponent";
+import { CommentComponent } from "../comment/CommentComponent";
 
 export function OneBlogComponent({ blog, setBlogs }) {
 

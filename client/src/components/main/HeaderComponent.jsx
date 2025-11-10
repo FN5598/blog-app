@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import "./HeaderComponent.css";
 import logo from "/Logo.png";
 import axios from 'axios';
-import { checkAuth } from '../utils/checkAuth';
+import { checkAuth } from '../../utils/checkAuth';
 import { useEffect, useState } from 'react';
 
 export function HeaderComponent() {

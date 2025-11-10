@@ -1,5 +1,5 @@
-import { FooterComponent } from "../components/FooterComponent";
-import { HeaderComponent } from "../components/HeaderComponent";
+import { FooterComponent } from "../components/main/FooterComponent";
+import { HeaderComponent } from "../components/main/HeaderComponent";
 import "./ContactUsPage.css";
 
 export function ContactUsPage() {

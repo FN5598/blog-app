@@ -1,4 +1,4 @@
-import { BlogsComponent } from "./BlogsComponent";
+import { BlogsComponent } from "./blog/BlogsComponent";
 import "./DiscoverComponent.css";
 
 export function DiscoverComponent() {

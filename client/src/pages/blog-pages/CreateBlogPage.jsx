@@ -1,6 +1,6 @@
 import './CreateBlogPage.css';
-import { HeaderComponent } from '../components/HeaderComponent';
-import { FooterComponent } from '../components/FooterComponent';
+import { HeaderComponent } from '../../components/main/HeaderComponent';
+import { FooterComponent } from '../../components/main/FooterComponent';
 import { useState } from 'react';
 import axios from 'axios';
 
