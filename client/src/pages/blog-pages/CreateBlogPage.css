@@ -3,7 +3,8 @@
     flex-direction: column;
     padding: 40px 160px;
     background-color: #1e1e1e;
-    min-height: 600px;
+    height: auto;
+    position: relative;
 }
 
 
@@ -12,7 +13,8 @@
     flex-direction: row;
     justify-content: space-between;
     color: rgb(167, 167, 167);
-    font-size: 18px; /* Consistent font size */
+    font-size: 18px;
+    /* Consistent font size */
     margin-bottom: 8px;
 }
 
@@ -45,6 +47,7 @@
     flex-direction: column;
     margin-top: 40px;
     width: 600px;
+    height: auto;
 }
 
 .create-blog-content-input-container {
@@ -55,16 +58,42 @@
 .create-blog-content-input-container textarea,
 .create-blog-introduction-input-container textarea,
 .create-blog-genre-selector-container select,
-.create-blog-title-input-container input {
+.create-blog-title-input-container textarea {
     background-color: transparent;
     border: 1px solid rgb(51, 51, 51);
-    padding: 12px; /* Slightly larger for touch */
+    padding: 12px;
     border-radius: 8px;
     margin-bottom: 25px;
-    font-size: 16px; /* Better for mobile */
+    font-size: 16px;
     color: white;
     width: 100%;
-    box-sizing: border-box; /* Include padding in width */
+    box-sizing: border-box;
+    resize: none;
+}
+
+.create-blog-content-input-container textarea {
+    height: 500px;
+    resize: vertical;
+    padding-bottom: 30px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.create-blog-introduction-input-container textarea {
+    height: 150px;
+}
+
+.create-blog-title-input-container textarea {
+    height: 100px;
+}
+
+.create-blog-genre-selector-container select {
+    height: 45px;
 }
 
 .option {
@@ -86,9 +115,28 @@
     width: 300px;
     height: 75px;
     align-self: center;
+    margin-top: 40px;
 }
 
 .create-blog-submit-button:hover {
     background-color: rgb(255, 220, 50);
     transform: translateY(-2px);
+}
+
+.input-value-length {
+    position: sticky;
+    margin-top: -50px;
+    margin-left: auto;
+    padding-right: 20px;
+    color: rgb(150, 150, 150);
+    font-size: 14px;
+}
+
+.input-value-length-red {
+    color: rgb(161, 38, 38);
+    position: sticky;
+    margin-top: -50px;
+    margin-left: auto;
+    padding-right: 20px;
+    font-size: 14px;
 }

@@ -9,6 +9,7 @@ import { ProtectedRoute } from './components/main/ProtectedRoutes';
 import { CreateBlogPage } from './pages/blog-pages/CreateBlogPage';
 import { BlogAuthorPage } from './pages/blog-pages/BlogAuthorPage';
 import { ToastContainer } from 'react-toastify';
+import { ScrollToTopComponent } from './components/main/ScrollToTopComponent';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         theme="dark"
       />
       <Router>
+        <ScrollToTopComponent />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />

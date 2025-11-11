@@ -3,9 +3,9 @@ import axios from 'axios';
 import './CommentComponent.css';
 import { CommentsList } from './CommentsList';
 
-export function CommentComponent({ postId }) {
+export function CommentComponent({ postId, setShowComments }) {
     const [commentContent, setCommentContent] = useState('');
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -65,11 +65,12 @@ export function CommentComponent({ postId }) {
     const handleCancel = () => {
         setCommentContent('');
         setIsExpanded(false);
+        setShowComments(false);
     };
 
     return (
         <div className="comment-component">
-            {!isExpanded && (
+            {isExpanded && (
                 <>
                     <form className="comment-form" onSubmit={handleSubmit}>
                         <textarea

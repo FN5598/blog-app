@@ -1,8 +1,12 @@
+/* ===== MOBILE FIRST (Default) ===== */
 .comment-component {
   margin: 15px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .add-comment-btn {
+  display: inline-block;
   background: none;
   border: 1px dashed #ccc;
   color: #666;
@@ -11,6 +15,9 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
 }
 
 .add-comment-btn:hover {
@@ -24,12 +31,14 @@
   border-radius: 12px;
   padding: 16px;
   border: 1px solid rgb(51, 51, 51);
-  width: 901px;
+  width: 100%;
+  box-sizing: border-box;
+  animation: slideDown 0.2s ease-out;
 }
 
 .comment-textarea {
-  background-color: rgb(25,25,25);
-  width: 875px;
+  background-color: rgb(25, 25, 25);
+  width: 100%;
   border: 1px solid rgb(51, 51, 51);
   border-radius: 8px;
   padding: 12px;
@@ -37,8 +46,9 @@
   resize: vertical;
   font-family: inherit;
   margin-bottom: 12px;
-  margin: 0 auto 12px auto;
   color: white;
+  box-sizing: border-box;
+  min-height: 80px;
 }
 
 .comment-textarea:focus {
@@ -51,17 +61,23 @@
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.cancel-btn,
+.submit-btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  min-width: 80px;
+  transition: background 0.2s ease;
 }
 
 .cancel-btn {
   background: #6c757d;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
 }
 
 .cancel-btn:hover {
@@ -71,12 +87,6 @@
 .submit-btn {
   background: #007bff;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -84,26 +94,28 @@
 }
 
 .submit-btn:disabled {
-  background: rgb(51,51,51);
+  background: rgb(51, 51, 51);
   cursor: not-allowed;
 }
 
-/* Comments List Styles */
+/* Comments List */
 .comments-list {
   margin-top: 15px;
 }
 
 .comment-item {
-  background: white;
+  background: rgb(25, 25, 25);
   border: 1px solid rgb(51, 51, 51);
   border-radius: 8px;
   padding: 12px;
+  margin-bottom: 12px;
 }
 
 .comment-content {
   font-size: 14px;
   line-height: 1.4;
   color: white;
+  margin-bottom: 8px;
 }
 
 .comment-meta {
@@ -111,7 +123,11 @@
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: white;
+  color: #ccc;
+}
+
+.comment-author {
+  font-weight: 600;
 }
 
 .comment-time {
@@ -119,11 +135,7 @@
   opacity: 0.7;
 }
 
-/* Animation for smooth appearance */
-.comment-form {
-  animation: slideDown 0.2s ease-out;
-}
-
+/* Animations */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -132,5 +144,156 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ===== TABLET (768px and up) ===== */
+@media (min-width: 768px) {
+  .comment-component {
+    margin: 20px 0;
+  }
+
+  .add-comment-btn {
+    width: auto;
+    max-width: none;
+  }
+
+  .comment-form {
+    padding: 20px;
+  }
+
+  .comment-textarea {
+    font-size: 15px;
+    min-height: 100px;
+  }
+
+  .comment-actions {
+    flex-wrap: nowrap;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+    min-width: 100px;
+  }
+
+  .comment-item {
+    padding: 16px;
+  }
+
+  .comment-content {
+    font-size: 15px;
+  }
+
+  .comment-meta {
+    font-size: 13px;
+  }
+}
+
+/* ===== LAPTOP (1024px and up) ===== */
+@media (min-width: 1024px) {
+  .comment-component {
+    margin: 25px 0;
+  }
+
+  .comment-form {
+    padding: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .comment-textarea {
+    font-size: 16px;
+    min-height: 120px;
+    padding: 16px;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    min-width: 120px;
+  }
+
+  .comment-item {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto 16px auto;
+  }
+
+  .comment-content {
+    font-size: 16px;
+  }
+
+  .comment-meta {
+    font-size: 14px;
+  }
+}
+
+/* ===== DESKTOP (1440px and up) ===== */
+@media (min-width: 1440px) {
+  .comment-form {
+    max-width: 900px;
+    padding: 28px;
+  }
+
+  .comment-textarea {
+    min-height: 140px;
+    padding: 20px;
+    font-size: 17px;
+  }
+
+  .comment-item {
+    max-width: 900px;
+    padding: 24px;
+  }
+
+  .comment-content {
+    line-height: 1.5;
+  }
+}
+
+/* ===== LARGE DESKTOP (1920px and up) ===== */
+@media (min-width: 1920px) {
+  .comment-form {
+    max-width: 1000px;
+  }
+
+  .comment-item {
+    max-width: 1000px;
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .add-comment-btn {
+    border-color: #555;
+    color: #ccc;
+  }
+
+  .add-comment-btn:hover {
+    background: #2a2a2a;
+    border-color: #007bff;
+    color: #007bff;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .comment-textarea,
+  .add-comment-btn {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .comment-form,
+  .add-comment-btn,
+  .cancel-btn,
+  .submit-btn {
+    animation: none;
+    transition: none;
   }
 }

@@ -1,5 +1,5 @@
 const Post = require("../models/postModel");
-const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
 //@desc Get all posts
 //@route GET /api/posts
@@ -46,26 +46,6 @@ const getAllPosts = async (req, res) => {
                 success: true,
                 totalLikes: totalLikes
             })
-        }
-
-        if (blog_id && user_id) {
-            const post = await Post.findById(blog_id);
-            if (!post) {
-                return res.status(404).json({
-                    success: false,
-                    message: "Failed to find post id:", blog_id
-                })
-            }
-            const userLiked = post.likes.includes(user_id);
-            const totalLikes = post.likes.length
-            if (userLiked) {
-                return res.status(200).json({
-                    success: true,
-                    message: "User liked post:", blog_id,
-                    isLiked: true,
-                    totalLikes: totalLikes
-                })
-            }
         }
 
         const posts = await Post.find(query, projection)
@@ -139,8 +119,22 @@ const createPost = async (req, res) => {
             author: req.user.id,
         });
 
+        const user = req.user;
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        const populatedPost = await newPost.populate('author', 'username email');
+
         await newPost.save();
-        res.status(201).json(newPost);
+        res.status(201).json({
+            success: true,
+            data: populatedPost,
+            message: "Post created successfully"
+        });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -156,9 +150,9 @@ const createPost = async (req, res) => {
 const updatePost = async (req, res) => {
     const { title, content, introduction } = req.body;
     const { like } = req.query;
+    const userId = req.user?.id;
 
-    if (like) {
-        console.log(req.params.id)
+    if (like && userId) {
         const post = await Post.findById(req.params.id);
         if (!post) {
             return res.status(404).json({
@@ -167,16 +161,27 @@ const updatePost = async (req, res) => {
             });
         }
 
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
         const userAlreadyLiked = post.likes.includes(req.user.id);
 
         if (userAlreadyLiked) {
             post.likes = post.likes.filter(userId => userId.toString() !== req.user.id);
+            user.likedPosts = user.likedPosts.filter(postId => postId.toString() !== post._id.toString());
         } else {
             post.likes.push(req.user.id);
+            user.likedPosts.push(post._id);
         }
 
         post.likes_count = post.likes.length || 0;
         await post.save();
+        await user.save();
 
         const totalLikes = post.likes.length;
 
@@ -243,7 +248,6 @@ const getPostById = async (req, res) => {
                 message: "Post not found"
             });
         }
-
         res.status(200).json({
             success: true,
             data: post

@@ -23,7 +23,11 @@ const userSchema = new Schema({
     },
     refreshToken: {
         type: String
-    }
+    },
+    likedPosts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }]
 }, {
     timestamps: true
 })

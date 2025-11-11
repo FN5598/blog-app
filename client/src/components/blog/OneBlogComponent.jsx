@@ -18,7 +18,6 @@ export function OneBlogComponent({ blog, setBlogs }) {
         async function fetchLikes() {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts?likes=true&user_id=${userId}&blog_id=${blog._id}`, { withCredentials: true });
-                setLiked(res.data?.isLiked || false);
                 setTotalLikes(res.data?.totalLikes || 0);
             } catch (err) {
                 console.log(err.response?.data?.message || "Error fetching likes");
@@ -29,6 +28,23 @@ export function OneBlogComponent({ blog, setBlogs }) {
         fetchLikes();
     }, [blog._id, userId]);
 
+    useEffect(() => {
+        async function fetchUserLikes() {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${userId}?includeLikedPosts=true`, { withCredentials: true });
+                if (res.data?.data) {
+                    if(res.data.data.includes(blog._id))
+                    setLiked(true);
+                } else {
+                    setLiked(false);
+                }
+            } catch (err) {
+                console.log(err.response?.data?.message || "Error fetching user likes");
+                setLiked(false);
+            }
+        }
+        fetchUserLikes();
+    }, [blog._id, userId]);
 
 
     async function updateLikes(blogId) {
@@ -109,7 +125,7 @@ export function OneBlogComponent({ blog, setBlogs }) {
     }
 
     function handleCommentButton() {
-        setShowComments(true);
+        showComments ? setShowComments(false) : setShowComments(true);
     }
 
     function handleRepostButton() {
@@ -154,11 +170,14 @@ export function OneBlogComponent({ blog, setBlogs }) {
                 className="view-blog-button"
                 onClick={() => handleButtonClick(blog._id)}
             >View Blog</button>
-            {showComments && (
+            {showComments ? (
                 <CommentComponent
                     className="comments-container"
-                    postId={blog._id} />
-            )}
+                    postId={blog._id}
+                    showComments={showComments}
+                    setShowComments={setShowComments}
+                    />
+            ) : null}
         </div>
     )
 }

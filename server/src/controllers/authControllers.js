@@ -46,14 +46,14 @@ const loginUser = async (req, res) => {
 
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
-            sameSite: "None",
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             maxAge: 15 * 60 * 1000,
             secure: process.env.NODE_ENV === 'production',
         });
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            sameSite: "None",
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             maxAge: 7 * 24 * 60 * 1000,
             secure: process.env.NODE_ENV === 'production',
         });
@@ -186,13 +186,13 @@ const logoutUser = async (req, res) => {
 
         res.clearCookie('accessToken', {
             httpOnly: true,
-            sameSite: "None",
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             secure: process.env.NODE_ENV === 'production',
         })
 
         res.clearCookie('refreshToken', {
             httpOnly: true,
-            sameSite: "None",
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             secure: process.env.NODE_ENV === 'production',
         })
 
@@ -274,7 +274,7 @@ const refreshToken = async (req, res) => {
 
         res.cookie('accessToken', newAccessToken, {
             httpOnly: true,
-            sameSite: 'None',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
             secure: process.env.NODE_ENV === 'production',
             path: "/",
             maxAge: 15 * 60 * 1000
