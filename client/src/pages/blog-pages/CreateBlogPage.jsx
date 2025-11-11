@@ -4,8 +4,11 @@ import { FooterComponent } from '../../components/main/FooterComponent';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateBlogPage() {
+
+    const navigate = useNavigate();
 
     const [title, setTitle] = useState('');
     const [introduction, setIntroduction] = useState('');
@@ -50,6 +53,7 @@ export function CreateBlogPage() {
                 progress: undefined,
                 theme: "dark"
             });
+            navigate(`/blog/${res.data.data._id}`);
         } catch (err) {
             if (err.response?.data?.message) {
                 toast.success(`${err.response.data.message}`, {
